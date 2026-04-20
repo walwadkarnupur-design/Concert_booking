@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concert Tickets</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #f0f8ff; /* Light blue background */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 80%;
+            max-width: 800px;
+            background-color: #f8f0e3; /* Light beige container */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h2 {
+            color: #6a5acd; /* Light purple headings */
+            text-align: center;
+        }
+
+        .concert-type {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .concert-type button {
+            background-color: #e6e6fa; /* Light lavender buttons */
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .concert-type button:hover {
+            background-color: #d8bfd8; /* Light pink hover */
+        }
+
+        .performers {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .performer {
+            background-color: #fffaf0; /* Light ivory performer boxes */
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .performer:hover {
+            background-color: #f0e0d6; /* Hover effect on performer boxes */
+        }
+
+        .merchandise {
+            margin-top: 15px;
+        }
+
+        .merchandise a {
+            display: block;
+            margin-top: 5px;
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .merchandise a:hover {
+            text-decoration: underline;
+        }
+
+        .buy-button {
+            background-color: #98fb98; /* Pale green buy button */
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: block;
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        .buy-button:hover {
+            background-color: #90ee90; /* Light green hover */
+        }
+
+        .ticket-options {
+            margin-top: 10px;
+        }
+
+        .ticket-option {
+            margin-bottom: 10px;
+        }
+
+        .ticket-price {
+            font-weight: bold;
+        }
+
+        #performerDetails {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Concert Tickets</h1>
+
+        <div class="concert-type">
+            <button onclick="showPerformers('indian')">Indian Concerts</button>
+            <button onclick="showPerformers('foreign')">Foreign Concerts</button>
+        </div>
+
+        <!-- Indian Performers -->
+        <div id="indianPerformers" class="performers">
+            <h2>Indian Performers</h2>
+            <div class="performer" onclick="showDetails('sunidhi')">Sunidhi Chauhan</div>
+            <div class="performer" onclick="showDetails('diljit')">Diljit Dosanjh</div>
+            <div class="performer" onclick="showDetails('arijit')">Arijit Singh</div>
+        </div>
+
+        <!-- Foreign Performers -->
+        <div id="foreignPerformers" class="performers">
+            <h2>Foreign Performers</h2>
+            <div class="performer" onclick="showDetails('coldplay')">Coldplay</div>
+            <div class="performer" onclick="showDetails('shawn')">Shawn Mendes</div>
+            <div class="performer" onclick="showDetails('taylor')">Taylor Swift</div>
+        </div>
+
+        <!-- Performer Details -->
+        <div id="performerDetails">
+            <h2 id="performerName"></h2>
+            <p id="performerDate"></p>
+            <p id="performerTime"></p>
+            <p id="performerVenue"></p>
+
+            <div class="ticket-options">
+                <div class="ticket-option">
+                    <span class="ticket-price" id="ticketPrice1"></span>
+                    <button class="buy-button" onclick="buyTicket('price1')">Buy Ticket</button>
+                </div>
+                <div class="ticket-option">
+                    <span class="ticket-price" id="ticketPrice2"></span>
+                    <button class="buy-button" onclick="buyTicket('price2')">Buy Ticket</button>
+                </div>
+                <div class="ticket-option">
+                    <span class="ticket-price" id="ticketPrice3"></span>
+                    <button class="buy-button" onclick="buyTicket('price3')">Buy Ticket</button>
+                </div>
+            </div>
+
+            <div class="merchandise">
+                <h4>Merchandise:</h4>
+                <a id="merchandise1" href="" target="_blank">T-Shirt</a>
+                <a id="merchandise2" href="" target="_blank">Poster</a>
+                <a id="merchandise3" href="" target="_blank">Cap</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showPerformers(concertType) {
+            if (concertType === 'indian') {
+                document.getElementById('indianPerformers').style.display = 'block';
+                document.getElementById('foreignPerformers').style.display = 'none';
+            } else {
+                document.getElementById('foreignPerformers').style.display = 'block';
+                document.getElementById('indianPerformers').style.display = 'none';
+            }
+            document.getElementById('performerDetails').style.display = 'none';
+        }
+
+        function showDetails(performer) {
+            const details = {
+                sunidhi: {
+                    name: 'Sunidhi Chauhan',
+                    date: '2024-12-15',
+                    time: '8:00 PM',
+                    venue: 'Mumbai Arena',
+                    price1: '₹2500',
+                    price2: '₹3500',
+                    price3: '₹5000',
+                    tshirt: 'https://www.amazon.in/s?k=sunidhi+chauhan+tshirt',
+                    poster: 'https://www.amazon.in/s?k=sunidhi+chauhan+poster',
+                    cap: 'https://www.amazon.in/s?k=sunidhi+chauhan+cap'
+                },
+                diljit: {
+                    name: 'Diljit Dosanjh',
+                    date: '2024-12-20',
+                    time: '7:30 PM',
+                    venue: 'Delhi Stadium',
+                    price1: '₹3000',
+                    price2: '₹4500',
+                    price3: '₹6000',
+                    tshirt: 'https://www.amazon.in/s?k=diljit+dosanjh+tshirt',
+                    poster: 'https://www.amazon.in/s?k=diljit+dosanjh+poster',
+                    cap: 'https://www.amazon.in/s?k=diljit+dosanjh+cap'
+                },
+                arijit: {
+                    name: 'Arijit Singh',
+                    date: '2025-01-10',
+                    time: '8:30 PM',
+                    venue: 'Kolkata Dome',
+                    price1: '₹2800',
+                    price2: '₹4000',
+                    price3: '₹5500',
+                    tshirt: 'https://www.amazon.in/s?k=arijit+singh+tshirt',
+                    poster: 'https://www.amazon.in/s?k=arijit+singh+poster',
+                    cap: 'https://www.amazon.in/s?k=arijit+singh+cap'
+                },
+                coldplay: {
+                    name: 'Coldplay',
+                    date: '2025-02-15',
+                    time: '9:00 PM',
+                    venue: 'London Arena',
+                    price1: '$100',
+                    price2: '$200',
+                    price3: '$300',
+                    tshirt: 'https://www.amazon.com/s?k=coldplay+tshirt',
+                    poster: 'https://www.amazon.com/s?k=coldplay+poster',
+                    cap: 'https://www.amazon.com/s?k=coldplay+cap'
+                },
+                shawn: {
+                    name: 'Shawn Mendes',
+                    date: '2025-03-01',
+                    time: '8:00 PM',
+                    venue: 'New York Stadium',
+                    price1: '$80',
+                    price2: '$150',
+                    price3: '$250',
+                    tshirt: 'https://www.amazon.com/s?k=shawn+mendes+tshirt',
+                    poster: 'https://www.amazon.com/s?k=shawn+mendes+poster',
+                    cap: 'https://www.amazon.com/s?k=shawn+mendes+cap'
+                },
+                taylor: {
+                    name: 'Taylor Swift',
+                    date: '2025-04-01',
+                    time: '7:30 PM',
+                    venue: 'Los Angeles Stadium',
+                    price1: '$120',
+                    price2: '$200',
+                    price3: '$350',
+                    tshirt: 'https://www.amazon.com/s?k=taylor+swift+tshirt',
+                    poster: 'https://www.amazon.com/s?k=taylor+swift+poster',
+                    cap: 'https://www.amazon.com/s?k=taylor+swift+cap'
+                }
+            };
+
+            const performerInfo = details[performer];
+            document.getElementById('performerName').textContent = performerInfo.name;
+            document.getElementById('performerDate').textContent = 'Date: ' + performerInfo.date;
+            document.getElementById('performerTime').textContent = 'Time: ' + performerInfo.time;
+            document.getElementById('performerVenue').textContent = 'Venue: ' + performerInfo.venue;
+
+            document.getElementById('ticketPrice1').textContent = 'Price: ' + performerInfo.price1;
+            document.getElementById('ticketPrice2').textContent = 'Price: ' + performerInfo.price2;
+            document.getElementById('ticketPrice3').textContent = 'Price: ' + performerInfo.price3;
+
+            document.getElementById('merchandise1').href = performerInfo.tshirt;
+            document.getElementById('merchandise2').href = performerInfo.poster;
+            document.getElementById('merchandise3').href = performerInfo.cap;
+
+            document.getElementById('performerDetails').style.display = 'block';
+        }
+
+        function buyTicket(priceType) {
+            alert('Ticket purchased for ' + priceType + ' option!');
+        }
+    </script>
+</body>
+</html>
+
+
+
